@@ -31,20 +31,23 @@ namespace CRUD
         {
             System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.txtCnpj = new System.Windows.Forms.TextBox();
+            this.txtNome = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.salvar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.excluir = new System.Windows.Forms.Button();
             this.editar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.buscar = new System.Windows.Forms.Button();
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.MOSTRA = new System.Windows.Forms.Button();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -52,12 +55,12 @@ namespace CRUD
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.13783F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.86217F));
-            tableLayoutPanel2.Controls.Add(this.textBox3, 1, 2);
-            tableLayoutPanel2.Controls.Add(this.textBox2, 1, 1);
+            tableLayoutPanel2.Controls.Add(this.txtCnpj, 1, 2);
+            tableLayoutPanel2.Controls.Add(this.txtNome, 1, 1);
             tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
             tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
-            tableLayoutPanel2.Controls.Add(this.textBox1, 1, 0);
+            tableLayoutPanel2.Controls.Add(this.txtId, 1, 0);
             tableLayoutPanel2.Location = new System.Drawing.Point(12, 12);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
@@ -67,6 +70,24 @@ namespace CRUD
             tableLayoutPanel2.Size = new System.Drawing.Size(341, 128);
             tableLayoutPanel2.TabIndex = 2;
             // 
+            // txtCnpj
+            // 
+            this.txtCnpj.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCnpj.Location = new System.Drawing.Point(116, 96);
+            this.txtCnpj.Name = "txtCnpj";
+            this.txtCnpj.Size = new System.Drawing.Size(222, 20);
+            this.txtCnpj.TabIndex = 5;
+            this.txtCnpj.TextChanged += new System.EventHandler(this.txtCnpj_TextChanged);
+            // 
+            // txtNome
+            // 
+            this.txtNome.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtNome.Location = new System.Drawing.Point(116, 53);
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(222, 20);
+            this.txtNome.TabIndex = 4;
+            this.txtNome.TextChanged += new System.EventHandler(this.txtNome_TextChanged);
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -74,7 +95,7 @@ namespace CRUD
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(82, 10);
+            this.label1.Location = new System.Drawing.Point(83, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 22);
             this.label1.TabIndex = 0;
@@ -87,7 +108,7 @@ namespace CRUD
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Location = new System.Drawing.Point(51, 52);
+            this.label2.Location = new System.Drawing.Point(52, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 22);
             this.label2.TabIndex = 1;
@@ -100,11 +121,20 @@ namespace CRUD
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(49, 95);
+            this.label3.Location = new System.Drawing.Point(50, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 22);
             this.label3.TabIndex = 2;
             this.label3.Text = "CNPJ";
+            // 
+            // txtId
+            // 
+            this.txtId.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtId.Location = new System.Drawing.Point(116, 11);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(222, 20);
+            this.txtId.TabIndex = 3;
+            this.txtId.TextChanged += new System.EventHandler(this.txtId_TextChanged);
             // 
             // salvar
             // 
@@ -164,30 +194,6 @@ namespace CRUD
             this.editar.UseVisualStyleBackColor = true;
             this.editar.Click += new System.EventHandler(this.editar_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Location = new System.Drawing.Point(115, 11);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(223, 20);
-            this.textBox1.TabIndex = 3;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox2.Location = new System.Drawing.Point(115, 53);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(223, 20);
-            this.textBox2.TabIndex = 4;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox3.Location = new System.Drawing.Point(115, 96);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(223, 20);
-            this.textBox3.TabIndex = 5;
-            // 
             // buscar
             // 
             this.buscar.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -197,6 +203,28 @@ namespace CRUD
             this.buscar.TabIndex = 3;
             this.buscar.Text = "BUSCAR";
             this.buscar.UseVisualStyleBackColor = true;
+            this.buscar.Click += new System.EventHandler(this.buscar_Click_1);
+            // 
+            // dgv
+            // 
+            this.dgv.AllowUserToOrderColumns = true;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Location = new System.Drawing.Point(87, 174);
+            this.dgv.Name = "dgv";
+            this.dgv.Size = new System.Drawing.Size(581, 187);
+            this.dgv.TabIndex = 4;
+            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
+            // 
+            // MOSTRA
+            // 
+            this.MOSTRA.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MOSTRA.Location = new System.Drawing.Point(540, 107);
+            this.MOSTRA.Name = "MOSTRA";
+            this.MOSTRA.Size = new System.Drawing.Size(128, 49);
+            this.MOSTRA.TabIndex = 5;
+            this.MOSTRA.Text = "MOSTRAR";
+            this.MOSTRA.UseVisualStyleBackColor = true;
+            this.MOSTRA.Click += new System.EventHandler(this.mostra_Click);
             // 
             // Form1
             // 
@@ -204,6 +232,8 @@ namespace CRUD
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.MOSTRA);
+            this.Controls.Add(this.dgv);
             this.Controls.Add(this.buscar);
             this.Controls.Add(tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -213,6 +243,7 @@ namespace CRUD
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -226,10 +257,12 @@ namespace CRUD
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCnpj;
+        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Button buscar;
+        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.Button MOSTRA;
     }
 }
 
